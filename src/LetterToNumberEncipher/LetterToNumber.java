@@ -5,7 +5,7 @@ package LetterToNumberEncipher;
  */
 public class LetterToNumber {
 	char[] letters = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-	double[] letterValue = new double[letters.length];
+	int[] letterValue = new int[letters.length];
 	
 	public int convertLetterToNumber(Character c){
 		int beg = 0;
@@ -13,7 +13,8 @@ public class LetterToNumber {
 		while(end >= beg){
 			int mid = (beg + end)/2; 
 			if(c.equals(letters[mid])){
-				letterValue[mid] = Math.random(); 
+				if(letterValue[mid] == 0)
+					letterValue[mid] = (int)(Math.random() * 101) + 1; 
 				return mid;
 			}
 			else if(c.compareTo(letters[mid]) < 0)
@@ -23,8 +24,8 @@ public class LetterToNumber {
 		}
 		return -1;
 	}
-	public char convertNumberToLetter(double letterNum) throws NoLetterException{
-		for(int x = letterValue.length - 1; x != -1; x--){
+	public char convertNumberToLetter(int letterNum) throws NoLetterException{
+		for(int x = 0; x < letterValue.length; x++){
 			if(letterValue[x] == letterNum)
 				return letters[x];
 		}
