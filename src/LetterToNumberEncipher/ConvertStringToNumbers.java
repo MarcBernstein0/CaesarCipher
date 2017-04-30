@@ -14,6 +14,10 @@ public class ConvertStringToNumbers {
 		this.s = s.toLowerCase();
 	}
 	
+	public String getString(){
+		return s;
+	}
+	
 	public String convertString(){
 		
 		return convertStringUtil(s);
