@@ -2,13 +2,15 @@ package LetterToNumberEncipher;
 
 public class ConvertStringToNumbers {
 	static LetterToNumber singleChar = new LetterToNumber();
-	static String[] encripted;
-	static String encriptedString = "";
+	static String[] encrypted;
+	static String encryptedString = "";
 	static String decriptedString = "";
+	StringBuilder key = new StringBuilder();
 	String s;
 	
 	
 	public ConvertStringToNumbers(String s){
+		
 		this.s = s.toLowerCase();
 	}
 	
@@ -18,28 +20,29 @@ public class ConvertStringToNumbers {
 	}
 	
 	private static String convertStringUtil(String s){
-		encripted = new String[s.length()];
+		encrypted = new String[s.length()];
 		for(int index = 0; index < s.length(); index++){
 			Character c = s.charAt(index);
-			if(c.equals(' '))
-				encripted[index] = " ";
-			else{
+			if(Character.isLetter(c)){
 				int letVal = singleChar.convertLetterToNumber(c);
-				encripted[index] = Integer.toString(singleChar.letterValue[letVal]);
+				encrypted[index] = Integer.toString(singleChar.letterValue[letVal]);
 			}	
+			else{
+				encrypted[index] = c.toString();
+			}
 		}
-		for(int x = 0; x < encripted.length; x++)
-			encriptedString += encripted[x] + " ";
-		return encriptedString;
+		for(int x = 0; x < encrypted.length; x++)
+			encryptedString += encrypted[x] + " ";
+		return encryptedString;
 	}
 	
 	public String convertBack() throws NoLetterException{
-		return convertBackUtil(encripted);
+		return convertBackUtil(encrypted);
 	}
 	
 	private static String convertBackUtil(String[] encripted) throws NoLetterException{
 		for(int index = 0; index < encripted.length; index++){
-			if(encripted[index].equals(" "))
+			if(encripted[index].equals(" ") )
 				decriptedString += " ";
 			else{
 				int d = Integer.parseInt(encripted[index]);
@@ -48,6 +51,14 @@ public class ConvertStringToNumbers {
 			//System.out.println(decriptedString);
 		}
 		return decriptedString;
+	}
+	
+	public String key(){
+		for(int x = 0; x < singleChar.letterValue.length; x++){
+			if(singleChar.letterValue[x] != 0)
+				key.append(singleChar.letters[x] + " = " + singleChar.letterValue[x] + "\n");
+		}
+		return key.toString();
 	}
 
 }

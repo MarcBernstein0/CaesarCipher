@@ -7,6 +7,7 @@ public class LetterToNumber {
 	char[] letters = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 	int[] letterValue = new int[letters.length];
 	
+	
 	public int convertLetterToNumber(Character c){
 		int beg = 0;
 		int end = letters.length;
